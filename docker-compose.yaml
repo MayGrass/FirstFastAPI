@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  # api:
+  #   build: .
+  #   ports:
+  #     - "8000:8000"
+  #   volumes:
+  #     - .:/app
+
+  db:
+    image: mariadb:10.3
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "api"
+      MYSQL_USER: "api"
+      MYSQL_PASSWORD: "api"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    environment:
+      - PMA_USER=api
+      - PMA_PASSWORD=api
